@@ -204,6 +204,61 @@
   .notfound a:active {
     transform: scale(0.97);
   }
+
+  /* ── Actions row ──────────────────────────────────────────── */
+
+.notfound-actions {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex-wrap: wrap;
+  justify-content: center;
+  animation: fadeUp 0.7s ease 0.4s both;
+}
+
+/* override animation on the link since parent handles it now */
+.notfound a {
+  animation: none;
+}
+
+.notfound-back-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 24px;
+  border-radius: 8px;
+  border: 1px solid #7f77dd;
+  font-size: 14px;
+  font-weight: 500;
+  color: #7f77dd;
+  background: transparent;
+  cursor: pointer;
+  transition: background 0.2s, border-color 0.2s, transform 0.15s;
+}
+
+.notfound-back-btn:hover {
+  background: rgba(127, 119, 221, 0.08);
+  border-color: #6056cc;
+  transform: translateY(-2px);
+}
+
+.notfound-back-btn:active {
+  transform: scale(0.97);
+}
+
+/* ── Dark-mode for back button ───────────────────────────── */
+
+@media (prefers-color-scheme: dark) {
+  .notfound-back-btn {
+    color: #a89ff0;
+    border-color: #a89ff0;
+  }
+
+  .notfound-back-btn:hover {
+    background: rgba(168, 159, 240, 0.1);
+    border-color: #c4bdf7;
+  }
+}
   
   /* ── Dark-mode overrides ─────────────────────────────────── */
   

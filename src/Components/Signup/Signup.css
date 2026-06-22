@@ -642,6 +642,11 @@
    
    .success-card strong { color: #1b4332; }
    
+   /* Hide Edge's native password reveal button */
+input::-ms-reveal,
+input::-ms-clear {
+  display: none;
+}
    /* ── Responsive — Tablet ─────────────────────────────────── */
    
    @media (max-width: 540px) {

@@ -17,7 +17,6 @@ function SignUp() {
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirm, setShowConfirm] = useState(false);
   const [errors, setErrors] = useState({});
-  const [submitted, setSubmitted] = useState(false);
 
   const validate = () => {
     const newErrors = {};
@@ -72,25 +71,9 @@ function SignUp() {
       setErrors(validationErrors);
       return;
     }
-    setSubmitted(true);
+    navigate("/404")
   };
 
-  if (submitted) {
-    return (
-      <div className="signup-page">
-        <div className="bg-blob blob-1" />
-        <div className="bg-blob blob-2" />
-        <div className="signup-card success-card">
-          <div className="success-icon">🎉</div>
-          <h2>Account created!</h2>
-          <p>Welcome aboard, <strong>{form.username}</strong>. Your account is ready.</p>
-          <button className="btn-primary" onClick={() => navigate("/")}>
-            Go to Login →
-          </button>
-        </div>
-      </div>
-    );
-  }
 
   return (
     <div className="signup-page">

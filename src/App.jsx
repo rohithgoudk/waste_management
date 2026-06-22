@@ -12,10 +12,12 @@ import Admindashboard from "./Components/Admindashboard/Admindashboard";
 import Services from "./Components/Services/Services";
 import Process from "./Components/Process/Process";
 import Contact from "./Components/Contact/Contact";
+import ScrollToTop from "./Components/ScrollToTop"
 
 function App() {
   return (
     <HashRouter>
+      <ScrollToTop />  
       <Routes>
         <Route element={<MainLayout />}>
           <Route path="/" element={<Home />} />

@@ -91,7 +91,7 @@ function Footer() {
 
           {/* ── Brand ── */}
           <div className="footer-brand">
-            <div className="footer-logo-wrap">
+            <div className="footer-logo-wrap" onClick={()=>navigate("/")}>
               <img src={Stacklyimg} alt="Stackly EcoClean" className="footer-logo" />
               <div className="footer-logo-glow" />
             </div>

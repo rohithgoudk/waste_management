@@ -357,7 +357,7 @@
    .password-toggle {
      position: absolute;
      right: 14px;
-     top: 42px;
+     top: 50%;
      background: transparent;
      border: none;
      color: #5a8a65;
@@ -376,6 +376,11 @@
      color: #2d6a4f;
      background: rgba(82,183,136,0.12);
    }
+
+   input::-ms-reveal,
+input::-ms-clear {
+  display: none;
+}
    
    /* ── Forgot Password ─────────────────────────────────────── */
    
