@@ -1,0 +1,560 @@
+/* ============================================================
+   LOGIN.CSS — EcoWaste / Stackly Green Theme
+   Palette: #081c15 deep · #2d6a4f mid · #52b788 accent
+            #74c69d light · #d8f3dc pale · #f0faf2 bg
+   ============================================================ */
+
+   @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Playfair+Display:wght@700;800&display=swap');
+
+   /* ── Keyframes ───────────────────────────────────────────── */
+   
+   @keyframes fadeUp {
+     from { opacity: 0; transform: translateY(24px); }
+     to   { opacity: 1; transform: translateY(0); }
+   }
+   
+   @keyframes gradientShift {
+     0%   { background-position: 0%   50%; }
+     50%  { background-position: 100% 50%; }
+     100% { background-position: 0%   50%; }
+   }
+   
+   @keyframes breathe {
+     0%, 100% { transform: scale(1);    opacity: 0.45; }
+     50%       { transform: scale(1.15); opacity: 0.8; }
+   }
+   
+   @keyframes orbitSpin {
+     from { transform: rotate(0deg)   translateX(180px) rotate(0deg); }
+     to   { transform: rotate(360deg) translateX(180px) rotate(-360deg); }
+   }
+   
+   @keyframes orbitSpin2 {
+     from { transform: rotate(120deg)  translateX(140px) rotate(-120deg); }
+     to   { transform: rotate(480deg)  translateX(140px) rotate(-480deg); }
+   }
+   
+   @keyframes orbitSpin3 {
+     from { transform: rotate(240deg)  translateX(210px) rotate(-240deg); }
+     to   { transform: rotate(600deg)  translateX(210px) rotate(-600deg); }
+   }
+   
+   @keyframes leafFloat {
+     0%, 100% { transform: translateY(0)   rotate(0deg); }
+     33%       { transform: translateY(-20px) rotate(6deg); }
+     66%       { transform: translateY(-10px) rotate(-4deg); }
+   }
+   
+   @keyframes logoGlow {
+     0%, 100% { filter: drop-shadow(0 0 8px rgba(82,183,136,0.3)); }
+     50%       { filter: drop-shadow(0 0 22px rgba(82,183,136,0.7)); }
+   }
+   
+   @keyframes inputFocusSlide {
+     from { transform: scaleX(0); }
+     to   { transform: scaleX(1); }
+   }
+   
+   @keyframes shimmer {
+     from { background-position: -200% center; }
+     to   { background-position:  200% center; }
+   }
+   
+   @keyframes glowPulse {
+     0%, 100% { box-shadow: 0 0 0 0   rgba(82,183,136,0.5); }
+     60%       { box-shadow: 0 0 0 14px rgba(82,183,136,0); }
+   }
+   
+   @keyframes ringPulse {
+     0%, 100% { transform: translate(-50%,-50%) scale(1);    opacity: 0.1; }
+     50%       { transform: translate(-50%,-50%) scale(1.12); opacity: 0.22; }
+   }
+   
+   @keyframes cardEntrance {
+     from { opacity: 0; transform: translateY(32px) scale(0.97); }
+     to   { opacity: 1; transform: translateY(0)    scale(1); }
+   }
+   
+   /* ── Page Container ──────────────────────────────────────── */
+   
+   .login-container {
+     /* Green CSS variables — override purple ones */
+     --accent:       #2d6a4f;
+     --accent-light: #52b788;
+     --accent-glow:  rgba(82,183,136,0.18);
+     --text-primary:   #0a2218;
+     --text-secondary: #3a5c3e;
+     --border-color:   #c5e8cb;
+     --bg-page:        #f0faf2;
+     --bg-card:        #ffffff;
+     --error:          #ef4444;
+     --radius:         18px;
+   
+     min-height: 100vh;
+     display: flex;
+     align-items: center;
+     justify-content: center;
+     padding: 40px 20px;
+     position: relative;
+     overflow: hidden;
+     font-family: 'Inter', 'Segoe UI', system-ui, sans-serif;
+   
+     /* Animated gradient mesh background */
+     background:
+       radial-gradient(ellipse 70% 60% at 10% 20%,  rgba(27,67,50,0.55)  0%, transparent 55%),
+       radial-gradient(ellipse 55% 70% at 90% 80%,  rgba(82,183,136,0.22) 0%, transparent 55%),
+       radial-gradient(ellipse 45% 45% at 50% 50%,  rgba(45,106,79,0.12)  0%, transparent 60%),
+       linear-gradient(160deg, #081c15 0%, #1b4332 35%, #2d6a4f 70%, #40916c 100%);
+     background-size: 200% 200%;
+     animation: gradientShift 14s ease infinite;
+   }
+   
+   .login-container * { box-sizing: border-box; }
+   
+   /* ── Decorative rings ────────────────────────────────────── */
+   
+   .login-container::before {
+     content: "";
+     position: absolute;
+     width: 560px;
+     height: 560px;
+     border-radius: 50%;
+     border: 1px solid rgba(82,183,136,0.1);
+     top: 50%;
+     left: 50%;
+     animation: ringPulse 5s ease-in-out infinite;
+     pointer-events: none;
+   }
+   
+   .login-container::after {
+     content: "";
+     position: absolute;
+     width: 800px;
+     height: 800px;
+     border-radius: 50%;
+     border: 1px dashed rgba(82,183,136,0.06);
+     top: 50%;
+     left: 50%;
+     animation: ringPulse 7s ease-in-out infinite 1.5s;
+     pointer-events: none;
+   }
+   
+   /* ── Orbiting eco icons ──────────────────────────────────── */
+   
+   .login-container .orbit-icon {
+     position: absolute;
+     top: 50%;
+     left: 50%;
+     font-size: 18px;
+     pointer-events: none;
+     z-index: 0;
+     opacity: 0.55;
+   }
+   
+   /* Inject via pseudo if no .orbit-icon divs — CSS-only ambient particles */
+   /* These use the card's own pseudo-elements instead (see below) */
+   
+   /* ── Floating leaf particles (background decoration) ─────── */
+   
+   .login-container .leaf-1,
+   .login-container .leaf-2,
+   .login-container .leaf-3 {
+     position: absolute;
+     font-size: 22px;
+     pointer-events: none;
+     opacity: 0.18;
+     animation: leafFloat 6s ease-in-out infinite;
+   }
+   
+   /* ── Login Card ──────────────────────────────────────────── */
+   
+   .login-card {
+     position: relative;
+     z-index: 2;
+     width: 100%;
+     max-width: 448px;
+     background: rgba(255,255,255,0.97);
+     border-radius: var(--radius);
+     padding: 48px 42px 42px;
+     box-shadow:
+       0 2px 4px  rgba(8,28,21,0.06),
+       0 12px 40px rgba(8,28,21,0.22),
+       0 0 0 1px rgba(82,183,136,0.14);
+     border: 1px solid rgba(82,183,136,0.2);
+     animation: cardEntrance 0.65s cubic-bezier(0.22,1,0.36,1) both;
+     backdrop-filter: blur(12px);
+   }
+   
+   /* Green top accent bar */
+   .login-card::before {
+     content: "";
+     position: absolute;
+     top: 0; left: 0; right: 0;
+     height: 4px;
+     border-radius: var(--radius) var(--radius) 0 0;
+     background: linear-gradient(90deg, #1b4332, #52b788, #74c69d, #52b788, #1b4332);
+     background-size: 300% 100%;
+     animation: shimmer 5s linear infinite;
+   }
+   
+   /* Soft glow bloom behind card */
+   .login-card::after {
+     content: "";
+     position: absolute;
+     inset: -30px;
+     border-radius: calc(var(--radius) + 30px);
+     background: radial-gradient(circle, rgba(82,183,136,0.18) 0%, transparent 65%);
+     z-index: -1;
+     animation: breathe 5s ease-in-out infinite;
+     pointer-events: none;
+   }
+   
+   /* ── Back Button ─────────────────────────────────────────── */
+   
+   .back-home-btn {
+     display: inline-flex;
+     align-items: center;
+     gap: 7px;
+     background: transparent;
+     border: none;
+     color: #3a5c3e;
+     font-size: 0.84rem;
+     font-weight: 600;
+     cursor: pointer;
+     padding: 0;
+     margin-bottom: 28px;
+     transition: color 0.2s, transform 0.2s;
+   }
+   
+   .back-home-btn:hover {
+     color: #2d6a4f;
+     transform: translateX(-3px);
+   }
+   
+   /* ── Header / Logo ───────────────────────────────────────── */
+   
+   .login-header {
+     text-align: center;
+     margin-bottom: 30px;
+     animation: fadeUp 0.6s ease 0.1s both;
+   }
+   
+   .logo-container {
+     display: flex;
+     align-items: center;
+     justify-content: center;
+     margin-bottom: 16px;
+   }
+   
+   .login-logo {
+     height: 52px;
+     width: auto;
+     object-fit: contain;
+     animation: logoGlow 3.5s ease-in-out infinite;
+   }
+   
+   .login-header h1 {
+     font-family: 'Playfair Display', Georgia, serif;
+     font-size: 1.75rem;
+     font-weight: 800;
+     margin: 0 0 6px;
+     letter-spacing: -0.5px;
+     background: linear-gradient(135deg, #1b4332, #2d6a4f, #40916c);
+     -webkit-background-clip: text;
+     -webkit-text-fill-color: transparent;
+     background-clip: text;
+   }
+   
+   .login-header p {
+     font-size: 0.92rem;
+     color: #5a7a60;
+     margin: 0;
+   }
+   
+   /* ── Input Groups ────────────────────────────────────────── */
+   
+   .input-group {
+     margin-bottom: 20px;
+     display: flex;
+     flex-direction: column;
+     animation: fadeUp 0.55s ease both;
+   }
+   
+   .input-group:nth-child(1) { animation-delay: 0.15s; }
+   .input-group:nth-child(2) { animation-delay: 0.22s; }
+   .input-group:nth-child(3) { animation-delay: 0.29s; }
+   .input-group:nth-child(4) { animation-delay: 0.36s; }
+   
+   .input-group label {
+     font-size: 0.84rem;
+     font-weight: 700;
+     color: #1b4332 !important;
+     margin-bottom: 7px;
+     letter-spacing: 0.2px;
+   }
+   
+   .input-group input,
+   .input-group select {
+     width: 100%;
+     padding: 13px 16px;
+     font-size: 0.94rem;
+     font-family: inherit;
+     color: #0a2218 !important;
+     background: #f4faf4;
+     border: 1.5px solid #c5e8cb;
+     border-radius: 10px;
+     outline: none;
+     transition: border-color 0.22s, box-shadow 0.22s, background 0.22s;
+     position: relative;
+   }
+   
+   .input-group input::placeholder { color: #7aaa84; }
+   
+   .input-group input:focus,
+   .input-group select:focus {
+     border-color: #52b788;
+     background: #fff;
+     box-shadow: 0 0 0 4px rgba(82,183,136,0.14);
+   }
+   
+   /* Hover state */
+   .input-group input:hover:not(:focus),
+   .input-group select:hover:not(:focus) {
+     border-color: #74c69d;
+     background: #f0faf2;
+   }
+   
+   /* Select arrow — green */
+   .input-group select {
+     cursor: pointer;
+     appearance: none;
+     background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='14' height='14' viewBox='0 0 24 24' fill='none' stroke='%232d6a4f' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");
+     background-repeat: no-repeat;
+     background-position: right 16px center;
+     background-color: #f4faf4;
+     padding-right: 42px;
+   }
+   
+   .input-group select:focus {
+     background-color: #fff;
+   }
+   
+   .input-group select option {
+     color: #0a2218;
+     background: #fff;
+   }
+   
+   /* ── Password Field ──────────────────────────────────────── */
+   
+   .password-group {
+     position: relative;
+   }
+   
+   .password-group input {
+     padding-right: 50px;
+   }
+   
+   .password-toggle {
+     position: absolute;
+     right: 14px;
+     top: 42px;
+     background: transparent;
+     border: none;
+     color: #5a8a65;
+     font-size: 1rem;
+     cursor: pointer;
+     display: flex;
+     align-items: center;
+     justify-content: center;
+     width: 28px;
+     height: 28px;
+     border-radius: 6px;
+     transition: color 0.2s, background 0.2s;
+   }
+   
+   .password-toggle:hover {
+     color: #2d6a4f;
+     background: rgba(82,183,136,0.12);
+   }
+   
+   /* ── Forgot Password ─────────────────────────────────────── */
+   
+   .forgot-password {
+     text-align: right;
+     margin-bottom: 22px;
+     animation: fadeUp 0.55s ease 0.38s both;
+   }
+   
+   .forgot-password a {
+     font-size: 0.84rem;
+     font-weight: 600;
+     color: #2d6a4f;
+     text-decoration: none;
+     transition: color 0.2s;
+     position: relative;
+   }
+   
+   .forgot-password a::after {
+     content: "";
+     position: absolute;
+     bottom: -2px;
+     left: 0; right: 0;
+     height: 1.5px;
+     background: #52b788;
+     transform: scaleX(0);
+     transform-origin: left;
+     transition: transform 0.25s ease;
+   }
+   
+   .forgot-password a:hover { color: #52b788; }
+   .forgot-password a:hover::after { transform: scaleX(1); }
+   
+   /* ── Login Button ────────────────────────────────────────── */
+   
+   .login-btn {
+     position: relative;
+     width: 100%;
+     padding: 14px;
+     font-size: 1rem;
+     font-weight: 700;
+     font-family: inherit;
+     color: #fff;
+     background: linear-gradient(135deg, #1b4332, #2d6a4f, #40916c, #52b788);
+     background-size: 200% 200%;
+     border: none;
+     border-radius: 10px;
+     cursor: pointer;
+     letter-spacing: 0.3px;
+     overflow: hidden;
+     animation: fadeUp 0.55s ease 0.44s both, glowPulse 3.5s ease 1.5s infinite;
+     transition: transform 0.25s cubic-bezier(0.34,1.56,0.64,1),
+                 box-shadow 0.25s ease,
+                 background-position 0.4s ease;
+   }
+   
+   .login-btn:hover {
+     background-position: 100% 50%;
+     transform: translateY(-3px) scale(1.01);
+     box-shadow: 0 14px 36px rgba(45,106,79,0.4), 0 4px 12px rgba(45,106,79,0.25);
+   }
+   
+   .login-btn:active {
+     transform: translateY(-1px) scale(0.99);
+     box-shadow: 0 6px 16px rgba(45,106,79,0.3);
+   }
+   
+   /* Shimmer sweep on hover */
+   .login-btn::before {
+     content: "";
+     position: absolute;
+     top: 0; left: -100%;
+     width: 55%; height: 100%;
+     background: linear-gradient(90deg, transparent, rgba(255,255,255,0.22), transparent);
+     transform: skewX(-18deg);
+     transition: left 0.55s ease;
+   }
+   
+   .login-btn:hover::before { left: 160%; }
+   
+   /* ── Error Message ───────────────────────────────────────── */
+   
+   .input-group span[style*="color"] {
+     color: #dc2626 !important;
+     font-size: 12.5px !important;
+     margin-top: 6px !important;
+     display: flex !important;
+     align-items: center;
+     gap: 5px;
+   }
+   
+   /* ── Signup Text ─────────────────────────────────────────── */
+   
+   .signup-text {
+     text-align: center;
+     margin: 22px 0 0;
+     font-size: 0.9rem;
+     color: #5a7a60;
+     animation: fadeUp 0.55s ease 0.5s both;
+   }
+   
+   .signup-link {
+     color: #2d6a4f;
+     font-weight: 700;
+     text-decoration: none;
+     position: relative;
+     transition: color 0.2s;
+   }
+   
+   .signup-link::after {
+     content: "";
+     position: absolute;
+     bottom: -2px;
+     left: 0; right: 0;
+     height: 1.5px;
+     background: #52b788;
+     transform: scaleX(0);
+     transform-origin: left;
+     transition: transform 0.25s ease;
+   }
+   
+   .signup-link:hover { color: #52b788; }
+   .signup-link:hover::after { transform: scaleX(1); }
+   
+   /* ── Divider (for optional OAuth section) ────────────────── */
+   
+   .login-divider {
+     display: flex;
+     align-items: center;
+     gap: 12px;
+     margin: 20px 0;
+     color: #7aaa84;
+     font-size: 0.82rem;
+   }
+   
+   .login-divider::before,
+   .login-divider::after {
+     content: "";
+     flex: 1;
+     height: 1px;
+     background: #d8f3dc;
+   }
+   
+   /* ── Eco badge footer ────────────────────────────────────── */
+   
+   .login-eco-badge {
+     display: flex;
+     align-items: center;
+     justify-content: center;
+     gap: 6px;
+     margin-top: 20px;
+     font-size: 11px;
+     font-weight: 600;
+     color: #52b788;
+     opacity: 0.75;
+     letter-spacing: 0.3px;
+   }
+   
+   /* ── Responsive ──────────────────────────────────────────── */
+   
+   @media (max-width: 480px) {
+     .login-card {
+       padding: 38px 24px 34px;
+     }
+   
+     .login-header h1 {
+       font-size: 1.5rem;
+     }
+   
+     .login-container::before,
+     .login-container::after {
+       display: none;
+     }
+   }
+   
+   @media (prefers-reduced-motion: reduce) {
+     *, *::before, *::after {
+       animation-duration: 0.01ms !important;
+       animation-iteration-count: 1 !important;
+       transition-duration: 0.01ms !important;
+     }
+   }

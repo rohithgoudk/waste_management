@@ -1,0 +1,701 @@
+/* ── Process.css ────────────────────────────────────────────── */
+
+/* ── Keyframes ─────────────────────────────────────────────── */
+
+@keyframes fadeUp {
+    from { opacity: 0; transform: translateY(26px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+  
+  @keyframes slideInRight {
+    from { opacity: 0; transform: translateX(32px); }
+    to   { opacity: 1; transform: translateX(0); }
+  }
+  
+  @keyframes slideOutLeft {
+    from { opacity: 1; transform: translateX(0); }
+    to   { opacity: 0; transform: translateX(-24px); }
+  }
+  
+  @keyframes iconBob {
+    0%, 100% { transform: translateY(0) scale(1); }
+    50%       { transform: translateY(-12px) scale(1.06); }
+  }
+  
+  @keyframes ringPulse {
+    0%, 100% { transform: translate(-50%, -50%) scale(1);    opacity: 0.13; }
+    50%       { transform: translate(-50%, -50%) scale(1.12); opacity: 0.26; }
+  }
+  
+  @keyframes ringPulseLg {
+    0%, 100% { transform: translate(-50%, -50%) scale(1);    opacity: 0.07; }
+    50%       { transform: translate(-50%, -50%) scale(1.15); opacity: 0.16; }
+  }
+  
+  @keyframes statPop {
+    from { opacity: 0; transform: scale(0.82); }
+    to   { opacity: 1; transform: scale(1); }
+  }
+  
+  @keyframes pillSlide {
+    from { opacity: 0; transform: translateX(-16px); }
+    to   { opacity: 1; transform: translateX(0); }
+  }
+  
+  @keyframes barFill {
+    from { height: 0%; }
+  }
+  
+  /* ── Base ──────────────────────────────────────────────────── */
+  
+  .process-page {
+    font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+    color: #1a2e1a;
+    background: #f4faf4;
+    overflow-x: hidden;
+  }
+  
+  /* ── Hero Header ───────────────────────────────────────────── */
+  
+  .proc-header {
+    background: linear-gradient(160deg, #081c15 0%, #1b4332 35%, #2d6a4f 68%, #52b788 100%);
+    color: #fff;
+    padding: 96px 6vw 68px;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+  
+  .proc-header::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(ellipse at 60% 50%, rgba(116,198,157,0.12) 0%, transparent 65%);
+    pointer-events: none;
+  }
+  
+  .proc-eyebrow-top {
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: #74c69d;
+    margin: 0 0 16px;
+    animation: fadeUp 0.55s ease both;
+  }
+  
+  .proc-header h1 {
+    font-size: clamp(28px, 5.5vw, 58px);
+    font-weight: 800;
+    line-height: 1.13;
+    margin: 0 0 18px;
+    animation: fadeUp 0.55s ease 0.1s both;
+  }
+  
+  .proc-subhead {
+    font-size: clamp(14px, 1.7vw, 17px);
+    line-height: 1.72;
+    max-width: 520px;
+    margin: 0 auto 40px;
+    color: rgba(255,255,255,0.72);
+    animation: fadeUp 0.55s ease 0.2s both;
+  }
+  
+  /* Process pill flow */
+  .proc-header-pills {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    flex-wrap: wrap;
+    animation: fadeUp 0.55s ease 0.3s both;
+  }
+  
+  .proc-header-pills span {
+    background: rgba(255,255,255,0.12);
+    border: 1px solid rgba(255,255,255,0.22);
+    border-radius: 999px;
+    padding: 7px 18px;
+    font-size: 14px;
+    font-weight: 600;
+    color: #d8f3dc;
+    animation: pillSlide 0.5s ease both;
+  }
+  
+  .pill-arrow {
+    background: none !important;
+    border: none !important;
+    padding: 0 !important;
+    color: rgba(255,255,255,0.4) !important;
+    font-size: 18px !important;
+  }
+  
+  /* ── Slide Layout ──────────────────────────────────────────── */
+  
+  .proc-slides {
+    display: grid;
+    grid-template-columns: 180px 1fr;
+    gap: 0;
+    background: #fff;
+    min-height: 420px;
+  }
+  
+  /* ── Vertical Sidebar ──────────────────────────────────────── */
+  
+  .proc-sidebar {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    padding: 40px 0 40px 32px;
+    border-right: 1.5px solid #ddf0e0;
+    gap: 0;
+  }
+  
+  .proc-sidebar-line {
+    position: absolute;
+    left: 50px;
+    top: 60px;
+    bottom: 60px;
+    width: 2px;
+    background: linear-gradient(#b7e4c7, #2d6a4f, #b7e4c7);
+    z-index: 0;
+    opacity: 0.4;
+  }
+  
+  .proc-step-btn {
+    position: relative;
+    z-index: 1;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 16px 12px 16px 0;
+    background: none;
+    border: none;
+    cursor: pointer;
+    text-align: left;
+    transition: opacity 0.2s;
+    overflow: hidden;
+  }
+  
+  .proc-step-btn:hover { opacity: 0.8; }
+  
+  .psb-num {
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    background: #e8f5e8;
+    border: 2px solid #b7e4c7;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 12px;
+    font-weight: 800;
+    color: #2d6a4f;
+    flex-shrink: 0;
+    transition: background 0.25s, border-color 0.25s, color 0.25s;
+  }
+  
+  .proc-step-active .psb-num {
+    background: var(--accent, #2d6a4f);
+    border-color: var(--accent, #2d6a4f);
+    color: #fff;
+  }
+  
+  .psb-label {
+    font-size: 13px;
+    font-weight: 600;
+    color: #6b8f71;
+    transition: color 0.2s;
+  }
+  
+  .proc-step-active .psb-label {
+    color: var(--accent, #2d6a4f);
+  }
+  
+  /* Vertical progress bar inside each sidebar button */
+  .psb-bar {
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 3px;
+    border-radius: 2px 2px 0 0;
+    transition: height 0.062s linear;
+    animation: barFill 0.1s ease;
+  }
+  
+  /* ── Slide Stage ───────────────────────────────────────────── */
+  
+  .proc-stage {
+    display: grid;
+    grid-template-columns: 1fr 240px;
+    gap: 40px;
+    align-items: center;
+    padding: 52px 48px 52px 52px;
+    position: relative;
+    overflow: hidden;
+    min-height: 380px;
+  }
+  
+  .p-enter { animation: slideInRight 0.38s ease both; }
+  .p-exit  { animation: slideOutLeft 0.38s ease both; pointer-events: none; }
+  
+  /* ── Slide Backgrounds ─────────────────────────────────────── */
+  
+  /* Step 1 — Collection: deep teal on dark forest */
+  .proc-bg-collection {
+    background: linear-gradient(140deg, #081c15 0%, #1b4332 40%, #2d6a4f 80%, #40916c 100%);
+    color: #d8f3dc;
+  }
+  
+  /* Step 2 — Sorting: crisp laboratory white-to-mint */
+  .proc-bg-sorting {
+    background: linear-gradient(140deg, #e8f8ee 0%, #c7edd6 40%, #9dd9b8 75%, #74c69d 100%);
+    color: #0a2e18;
+  }
+  
+  /* Step 3 — Recycling: lime-earth gradient */
+  .proc-bg-recycling {
+    background: linear-gradient(140deg, #ecf5dc 0%, #cfe8a0 40%, #afd464 75%, #8fbe2a 100%);
+    color: #1a2e05;
+  }
+  
+  /* Step 4 — Recovery: rich emerald-to-teal */
+  .proc-bg-recovery {
+    background: linear-gradient(140deg, #0a3622 0%, #155736 30%, #1e7a4e 60%, #34a86e 90%, #52b788 100%);
+    color: #d8f3dc;
+  }
+  
+  /* ── Slide Text ────────────────────────────────────────────── */
+  
+  .proc-text { animation: fadeUp 0.42s ease 0.08s both; }
+  
+  .proc-slide-eyebrow {
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 2.5px;
+    text-transform: uppercase;
+    margin: 0 0 14px;
+    display: block;
+  }
+  
+  .proc-text h2 {
+    font-size: clamp(18px, 2.4vw, 26px);
+    font-weight: 700;
+    line-height: 1.32;
+    margin: 0 0 14px;
+  }
+  
+  .proc-bg-collection .proc-text h2,
+  .proc-bg-recovery   .proc-text h2 { color: #d8f3dc; }
+  
+  .proc-bg-sorting .proc-text h2    { color: #0a2e18; }
+  .proc-bg-recycling .proc-text h2  { color: #1a2e05; }
+  
+  .proc-body {
+    font-size: 14px;
+    line-height: 1.78;
+    margin: 0 0 22px;
+    opacity: 0.85;
+    max-width: 480px;
+  }
+  
+  /* Feature points */
+  .proc-points {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 8px 20px;
+  }
+  
+  .proc-points li {
+    font-size: 13px;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    line-height: 1.4;
+  }
+  
+  .proc-points li::before {
+    content: "";
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: var(--dot, #2d6a4f);
+    flex-shrink: 0;
+  }
+  
+  .proc-bg-collection .proc-points li,
+  .proc-bg-recovery   .proc-points li { color: #b7e4c7; }
+  
+  .proc-bg-sorting .proc-points li   { color: #1b4332; }
+  .proc-bg-recycling .proc-points li { color: #2a4a00; }
+  
+  /* ── Visual Panel ──────────────────────────────────────────── */
+  
+  .proc-visual {
+    position: relative;
+    height: 260px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 16px;
+  }
+  
+  .proc-big-icon {
+    font-size: 64px;
+    line-height: 1;
+    z-index: 2;
+    animation: iconBob 3.8s ease-in-out infinite;
+    filter: drop-shadow(0 4px 12px rgba(0,0,0,0.12));
+  }
+  
+  .proc-stat-box {
+    background: rgba(255,255,255,0.22);
+    border: 2px solid;
+    border-radius: 14px;
+    padding: 16px 22px;
+    text-align: center;
+    backdrop-filter: blur(6px);
+    z-index: 2;
+    animation: statPop 0.45s ease 0.18s both;
+  }
+  
+  .proc-stat-val {
+    display: block;
+    font-size: 34px;
+    font-weight: 800;
+    line-height: 1;
+    margin-bottom: 4px;
+  }
+  
+  .proc-bg-collection .proc-stat-val { color: #74c69d; }
+  .proc-bg-recovery   .proc-stat-val { color: #74c69d; }
+  
+  .proc-stat-lbl {
+    font-size: 11px;
+    font-weight: 600;
+    opacity: 0.65;
+    display: block;
+    line-height: 1.4;
+  }
+  
+  .proc-bg-collection .proc-stat-lbl,
+  .proc-bg-recovery   .proc-stat-lbl { color: #b7e4c7; }
+  
+  /* Step badge */
+  .proc-step-badge {
+    position: absolute;
+    top: 12px;
+    right: 0;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    color: #fff;
+    font-size: 14px;
+    font-weight: 800;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 3;
+    box-shadow: 0 4px 14px rgba(0,0,0,0.18);
+  }
+  
+  /* Rings */
+  .proc-ring {
+    position: absolute;
+    width: 170px;
+    height: 170px;
+    border-radius: 50%;
+    border: 1.5px solid;
+    top: 50%;
+    left: 50%;
+    animation: ringPulse 3.4s ease-in-out infinite;
+    pointer-events: none;
+    opacity: 0.18;
+  }
+  
+  .proc-ring-lg {
+    width: 240px;
+    height: 240px;
+    animation: ringPulseLg 3.4s ease-in-out infinite 1s;
+    opacity: 0.1;
+  }
+  
+  /* ── Full Cycle Flow ───────────────────────────────────────── */
+  
+  .proc-flow {
+    padding: 72px 6vw;
+    background: #f0f9f0;
+    text-align: center;
+  }
+  
+  .proc-flow h2 {
+    font-size: clamp(20px, 3vw, 30px);
+    font-weight: 700;
+    color: #1b4332;
+    margin: 0 0 40px;
+  }
+  
+  .flow-track {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0;
+    flex-wrap: wrap;
+  }
+  
+  .flow-node {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: relative;
+  }
+  
+  .flow-circle {
+    width: 64px;
+    height: 64px;
+    border-radius: 50%;
+    font-size: 28px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #fff;
+    cursor: pointer;
+    box-shadow: 0 6px 20px rgba(0,0,0,0.14);
+    transition: transform 0.2s, box-shadow 0.2s;
+    margin-bottom: 12px;
+  }
+  
+  .flow-circle:hover {
+    transform: translateY(-4px) scale(1.08);
+    box-shadow: 0 10px 28px rgba(0,0,0,0.18);
+  }
+  
+  .flow-label {
+    font-size: 13px;
+    font-weight: 700;
+    color: #2d6a4f;
+    margin: 0;
+  }
+  
+  .flow-arrow {
+    width: 60px;
+    height: 3px;
+    border-radius: 2px;
+    opacity: 0.45;
+    margin: 0 4px;
+    margin-bottom: 28px;
+    align-self: center;
+  }
+  
+  /* ── Stats Strip ───────────────────────────────────────────── */
+  
+  .proc-stats {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+    background: linear-gradient(135deg, #1b4332, #2d6a4f);
+    padding: 56px 6vw;
+    gap: 0;
+  }
+  
+  .proc-stat-card {
+    text-align: center;
+    padding: 16px 20px;
+    border-right: 1px solid rgba(255,255,255,0.1);
+  }
+  
+  .proc-stat-card:last-child { border-right: none; }
+  
+  .proc-stat-card h3 {
+    font-size: clamp(26px, 3.5vw, 40px);
+    font-weight: 800;
+    color: #74c69d;
+    margin: 0 0 6px;
+    line-height: 1;
+  }
+  
+  .proc-stat-card p {
+    font-size: 13px;
+    color: rgba(255,255,255,0.6);
+    margin: 0;
+    letter-spacing: 0.3px;
+  }
+  
+  /* ── FAQ ───────────────────────────────────────────────────── */
+  
+  .proc-faq {
+    padding: 72px 6vw;
+    background: #fff;
+  }
+  
+  .proc-faq h2 {
+    font-size: clamp(20px, 3vw, 30px);
+    font-weight: 700;
+    color: #1b4332;
+    text-align: center;
+    margin: 0 0 40px;
+  }
+  
+  .faq-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 20px;
+    max-width: 900px;
+    margin: 0 auto;
+  }
+  
+  .faq-card {
+    background: #f4faf4;
+    border: 1px solid #d8f3dc;
+    border-left: 4px solid #40916c;
+    border-radius: 0 14px 14px 0;
+    padding: 24px 22px;
+    transition: transform 0.2s, box-shadow 0.2s;
+  }
+  
+  .faq-card:hover {
+    transform: translateX(4px);
+    box-shadow: 4px 8px 24px rgba(45,106,79,0.10);
+  }
+  
+  .faq-card h3 {
+    font-size: 15px;
+    font-weight: 700;
+    color: #1b4332;
+    margin: 0 0 10px;
+    line-height: 1.4;
+  }
+  
+  .faq-card p {
+    font-size: 13px;
+    line-height: 1.7;
+    color: #3a5c3e;
+    margin: 0;
+  }
+  
+  /* ── CTA ───────────────────────────────────────────────────── */
+  
+  .proc-cta {
+    background: linear-gradient(140deg, #081c15, #1b4332 50%, #2d6a4f);
+    color: #fff;
+    text-align: center;
+    padding: 80px 6vw;
+  }
+  
+  .proc-cta h2 {
+    font-size: clamp(22px, 3.5vw, 36px);
+    font-weight: 800;
+    margin: 0 0 14px;
+    line-height: 1.25;
+  }
+  
+  .proc-cta p {
+    font-size: 15px;
+    line-height: 1.72;
+    opacity: 0.78;
+    max-width: 480px;
+    margin: 0 auto 32px;
+  }
+  
+  .proc-cta-btns {
+    display: flex;
+    gap: 14px;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+  
+  .btn-primary {
+    padding: 13px 30px;
+    background: #52b788;
+    color: #fff;
+    border: none;
+    border-radius: 8px;
+    font-size: 15px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: background 0.2s, transform 0.15s;
+  }
+  
+  .btn-primary:hover { background: #40916c; transform: translateY(-2px); }
+  .btn-primary:active { transform: scale(0.97); }
+  
+  .btn-outline {
+    padding: 13px 30px;
+    background: transparent;
+    color: #fff;
+    border: 2px solid rgba(255,255,255,0.4);
+    border-radius: 8px;
+    font-size: 15px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: border-color 0.2s, background 0.2s, transform 0.15s;
+  }
+  
+  .btn-outline:hover {
+    border-color: rgba(255,255,255,0.85);
+    background: rgba(255,255,255,0.08);
+    transform: translateY(-2px);
+  }
+  
+  .btn-outline:active { transform: scale(0.97); }
+  
+  /* ── Responsive ────────────────────────────────────────────── */
+  
+  @media (max-width: 768px) {
+    .proc-slides {
+      grid-template-columns: 1fr;
+    }
+  
+    .proc-sidebar {
+      flex-direction: row;
+      border-right: none;
+      border-bottom: 1.5px solid #ddf0e0;
+      padding: 16px 20px;
+      gap: 4px;
+      overflow-x: auto;
+    }
+  
+    .proc-sidebar-line { display: none; }
+  
+    .proc-step-btn {
+      flex-direction: column;
+      gap: 4px;
+      padding: 8px 14px;
+      align-items: center;
+    }
+  
+    .psb-bar {
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      height: 3px !important;
+      top: auto;
+    }
+  
+    .proc-stage {
+      grid-template-columns: 1fr;
+      padding: 36px 28px;
+    }
+  
+    .proc-visual { display: none; }
+  
+    .proc-points { grid-template-columns: 1fr; }
+  
+    .flow-arrow { width: 30px; }
+  
+    .proc-stats { grid-template-columns: repeat(2, 1fr); }
+  
+    .proc-stat-card:nth-child(2) { border-right: none; }
+    .proc-stat-card:nth-child(3) { border-right: 1px solid rgba(255,255,255,0.1); }
+    .proc-stat-card { border-bottom: 1px solid rgba(255,255,255,0.08); }
+  }
+  
+  @media (prefers-reduced-motion: reduce) {
+    .proc-ring,
+    .proc-ring-lg,
+    .proc-big-icon { animation: none; }
+  }

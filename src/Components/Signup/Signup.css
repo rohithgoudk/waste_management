@@ -1,0 +1,712 @@
+/* ============================================================
+   SIGNUP.CSS — EcoWaste / Waste Management Light Green Theme
+   Palette: #f0faf2 bg · #d8f3dc pale · #b7e4c7 light
+            #74c69d mid · #52b788 accent · #2d6a4f deep
+            #1b4332 forest · #081c15 text
+   ============================================================ */
+
+   @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Playfair+Display:wght@700;800&display=swap');
+
+   /* ── Keyframes ───────────────────────────────────────────── */
+   
+   @keyframes fadeUp {
+     from { opacity: 0; transform: translateY(20px); }
+     to   { opacity: 1; transform: translateY(0); }
+   }
+   
+   @keyframes cardEntrance {
+     from { opacity: 0; transform: translateY(28px) scale(0.97); }
+     to   { opacity: 1; transform: translateY(0)    scale(1); }
+   }
+   
+   @keyframes floatLeaf {
+     0%, 100% { transform: translateY(0)     rotate(0deg)  scale(1); }
+     33%       { transform: translateY(-18px) rotate(8deg)  scale(1.04); }
+     66%       { transform: translateY(-9px)  rotate(-5deg) scale(0.98); }
+   }
+   
+   @keyframes glowPulse {
+     0%, 100% { box-shadow: 0 0 0 0    rgba(45,106,79,0.35); }
+     60%       { box-shadow: 0 0 0 12px rgba(45,106,79,0); }
+   }
+   
+   @keyframes shimmer {
+     from { background-position: -200% center; }
+     to   { background-position:  200% center; }
+   }
+   
+   @keyframes checkPop {
+     from { transform: scale(0); opacity: 0; }
+     to   { transform: scale(1); opacity: 1; }
+   }
+   
+   @keyframes successBounce {
+     0%   { transform: scale(0.6); opacity: 0; }
+     70%  { transform: scale(1.1); }
+     100% { transform: scale(1);   opacity: 1; }
+   }
+   
+   @keyframes spinSlow {
+     from { transform: rotate(0deg); }
+     to   { transform: rotate(360deg); }
+   }
+   
+   /* ── Page Container ──────────────────────────────────────── */
+   
+   .signup-page {
+     --accent:         #2d6a4f;
+     --accent-light:   #52b788;
+     --accent-pale:    #74c69d;
+     --text-primary:   #0a2218;
+     --text-secondary: #2d4a35;
+     --text-muted:     #5a7a60;
+     --border-color:   #a8d5b5;
+     --bg-page:        #e8f5ec;
+     --bg-card:        #ffffff;
+     --error:          #dc2626;
+     --radius:         16px;
+   
+     min-height: 100vh;
+     display: flex;
+     align-items: flex-start;
+     justify-content: center;
+     padding: 40px 16px 60px;
+     position: relative;
+     overflow-x: hidden;
+     font-family: 'Inter', 'Segoe UI', system-ui, sans-serif;
+   
+     /* Light green layered background */
+     background:
+       radial-gradient(ellipse 70% 50% at 5%  10%,  rgba(116,198,157,0.28) 0%, transparent 55%),
+       radial-gradient(ellipse 55% 60% at 95% 90%,  rgba(82,183,136,0.22)  0%, transparent 55%),
+       radial-gradient(ellipse 40% 40% at 50% 50%,  rgba(184,228,199,0.18) 0%, transparent 60%),
+       linear-gradient(160deg, #d8f3dc 0%, #e8f5ec 40%, #c8edda 75%, #d8f3dc 100%);
+   }
+   
+   .signup-page * { box-sizing: border-box; }
+   
+   /* ── Decorative floating eco icons ──────────────────────── */
+   
+   .bg-blob {
+     position: absolute;
+     pointer-events: none;
+     font-size: 52px;
+     opacity: 0.09;
+     user-select: none;
+     z-index: 0;
+   }
+   
+   .bg-blob.blob-1 {
+     top: 6%;
+     left: 3%;
+     animation: floatLeaf 9s ease-in-out infinite;
+     font-size: 80px;
+   }
+   
+   .bg-blob.blob-2 {
+     bottom: 8%;
+     right: 4%;
+     animation: floatLeaf 11s ease-in-out infinite 2.5s;
+     font-size: 96px;
+   }
+   
+   /* Extra ambient leaf using ::before/after on page */
+   .signup-page::before {
+     content: "♻";
+     position: absolute;
+     top: 14%;
+     right: 8%;
+     font-size: 44px;
+     color: #2d6a4f;
+     opacity: 0.07;
+     animation: floatLeaf 13s ease-in-out infinite 1s;
+     pointer-events: none;
+   }
+   
+   .signup-page::after {
+     content: "🌿";
+     position: absolute;
+     bottom: 20%;
+     left: 6%;
+     font-size: 38px;
+     opacity: 0.1;
+     animation: floatLeaf 10s ease-in-out infinite 3s;
+     pointer-events: none;
+   }
+   
+   /* ── Signup Card ─────────────────────────────────────────── */
+   
+   .signup-card {
+     position: relative;
+     z-index: 2;
+     width: 100%;
+     max-width: 468px;
+     background: #ffffff;
+     border-radius: var(--radius);
+     padding: 40px 36px 36px;
+     border: 1px solid rgba(45,106,79,0.14);
+     box-shadow:
+       0 1px 3px   rgba(27,67,50,0.06),
+       0 8px 32px   rgba(27,67,50,0.1),
+       0 24px 64px  rgba(27,67,50,0.07);
+     animation: cardEntrance 0.6s cubic-bezier(0.22,1,0.36,1) both;
+     margin: auto 0;
+   }
+   
+   /* Top accent bar — green stripe */
+   .signup-card::before {
+     content: "";
+     position: absolute;
+     top: 0; left: 0; right: 0;
+     height: 4px;
+     border-radius: var(--radius) var(--radius) 0 0;
+     background: linear-gradient(90deg, #2d6a4f, #52b788, #74c69d, #52b788, #2d6a4f);
+     background-size: 300% 100%;
+     animation: shimmer 5s linear infinite;
+   }
+   
+   /* Subtle inner tint */
+   .signup-card::after {
+     content: "";
+     position: absolute;
+     inset: 0;
+     border-radius: var(--radius);
+     background: linear-gradient(160deg, rgba(232,245,236,0.35) 0%, transparent 60%);
+     pointer-events: none;
+     z-index: 0;
+   }
+   
+   .signup-card > * { position: relative; z-index: 1; }
+   
+   /* ── Back Button ─────────────────────────────────────────── */
+   
+   .back-home-btn {
+     display: inline-flex;
+     align-items: center;
+     gap: 6px;
+     background: transparent;
+     border: none;
+     color: var(--text-muted);
+     font-size: 0.83rem;
+     font-weight: 600;
+     cursor: pointer;
+     padding: 6px 0;
+     margin-bottom: 18px;
+     min-height: 44px;
+     transition: color 0.2s, transform 0.2s;
+   }
+   
+   .back-home-btn:hover {
+     color: var(--accent);
+     transform: translateX(-3px);
+   }
+   
+   /* ── Header / Logo ───────────────────────────────────────── */
+   
+   .signup-header {
+     text-align: center;
+     margin-bottom: 22px;
+     animation: fadeUp 0.55s ease 0.1s both;
+   }
+   
+   .logo-container {
+     display: flex;
+     align-items: center;
+     justify-content: center;
+     margin-bottom: 12px;
+   }
+   
+   .login-logo {
+     height: 46px;
+     width: auto;
+     object-fit: contain;
+     filter: drop-shadow(0 2px 8px rgba(45,106,79,0.2));
+   }
+   
+   .signup-header h1 {
+     font-family: 'Playfair Display', Georgia, serif;
+     font-size: 1.6rem;
+     font-weight: 800;
+     margin: 0 0 5px;
+     letter-spacing: -0.4px;
+     color: #1b4332;
+   }
+   
+   .signup-header p {
+     font-size: 0.9rem;
+     color: var(--text-muted);
+     margin: 0;
+   }
+   
+   /* ── Eco Badge Strip ─────────────────────────────────────── */
+   
+   .eco-strip {
+     display: flex;
+     align-items: center;
+     justify-content: center;
+     gap: 16px;
+     margin-bottom: 20px;
+     padding: 9px 14px;
+     background: #eaf5ec;
+     border: 1px solid #c2e0c8;
+     border-radius: 10px;
+     animation: fadeUp 0.5s ease 0.13s both;
+   }
+   
+   .eco-badge {
+     display: flex;
+     align-items: center;
+     gap: 5px;
+     font-size: 0.75rem;
+     font-weight: 600;
+     color: #2d6a4f;
+   }
+   
+   .eco-badge-dot {
+     width: 6px; height: 6px;
+     background: #52b788;
+     border-radius: 50%;
+     flex-shrink: 0;
+   }
+   
+   /* ── Social Buttons ──────────────────────────────────────── */
+   
+   .social-row {
+     display: flex;
+     flex-direction: column;
+     gap: 9px;
+     margin-bottom: 18px;
+     animation: fadeUp 0.5s ease 0.16s both;
+   }
+   
+   .social-btn {
+     display: flex;
+     align-items: center;
+     justify-content: center;
+     gap: 10px;
+     width: 100%;
+     padding: 11px 16px;
+     min-height: 44px;
+     font-size: 0.875rem;
+     font-weight: 600;
+     font-family: inherit;
+     color: #0a2218 !important;
+     background: #f4faf5;
+     border: 1.5px solid #c2e0c8;
+     border-radius: 10px;
+     cursor: pointer;
+     transition: border-color 0.2s, background 0.2s, transform 0.2s, box-shadow 0.2s;
+   }
+   
+   .social-btn:hover {
+     border-color: #52b788;
+     background: #eaf5ec;
+     transform: translateY(-2px);
+     box-shadow: 0 5px 16px rgba(45,106,79,0.12);
+   }
+   
+   .social-btn:active { transform: scale(0.98); }
+   
+   /* ── Divider ─────────────────────────────────────────────── */
+   
+   .divider {
+     display: flex;
+     align-items: center;
+     gap: 12px;
+     margin: 16px 0;
+     color: #7aaa84;
+     font-size: 0.8rem;
+     animation: fadeUp 0.5s ease 0.2s both;
+   }
+   
+   .divider::before,
+   .divider::after {
+     content: "";
+     flex: 1;
+     height: 1px;
+     background: #c8e6cc;
+   }
+   
+   .divider span { white-space: nowrap; }
+   
+   /* ── Form Fields ─────────────────────────────────────────── */
+   
+   .field {
+     margin-bottom: 14px;
+     display: flex;
+     flex-direction: column;
+     animation: fadeUp 0.5s ease both;
+   }
+   
+   .field:nth-child(1) { animation-delay: 0.14s; }
+   .field:nth-child(2) { animation-delay: 0.2s; }
+   .field:nth-child(3) { animation-delay: 0.26s; }
+   .field:nth-child(4) { animation-delay: 0.32s; }
+   .field:nth-child(5) { animation-delay: 0.38s; }
+   
+   .field label {
+     font-size: 0.82rem;
+     font-weight: 700;
+     color: #1b4332;
+     margin-bottom: 6px;
+     letter-spacing: 0.15px;
+   }
+   
+   /* ── Input Wrap ──────────────────────────────────────────── */
+   
+   .input-wrap {
+     position: relative;
+     display: flex;
+     align-items: center;
+   }
+   
+   .input-icon {
+     position: absolute;
+     left: 12px;
+     font-size: 0.95rem;
+     line-height: 1;
+     pointer-events: none;
+     z-index: 1;
+     display: flex;
+     align-items: center;
+   }
+   
+   .input-wrap input {
+     width: 100%;
+     padding: 12px 46px 12px 40px;
+     font-size: 0.92rem;
+     font-family: inherit;
+     color: #0a2218;
+     background: #f7fbf7;
+     border: 1.5px solid #c2e0c8;
+     border-radius: 9px;
+     outline: none;
+     -webkit-appearance: none;
+     appearance: none;
+     transition: border-color 0.2s, box-shadow 0.2s, background 0.2s;
+   }
+   
+   .input-wrap input::placeholder { color: #88b895; }
+   
+   .input-wrap input:hover:not(:focus) {
+     border-color: #74c69d;
+     background: #f0f8f2;
+   }
+   
+   .input-wrap input:focus {
+     border-color: #2d6a4f;
+     background: #fff;
+     box-shadow: 0 0 0 3.5px rgba(45,106,79,0.12);
+   }
+   
+   /* ── Password Toggle ─────────────────────────────────────── */
+   
+   .toggle-pw {
+     position: absolute;
+     right: 6px;
+     display: flex;
+     align-items: center;
+     justify-content: center;
+     width: 32px; height: 32px;
+     background: #2d6a4f;
+     border: none;
+     border-radius: 7px;
+     cursor: pointer;
+     flex-shrink: 0;
+     transition: background 0.2s, transform 0.18s;
+   }
+   
+   .toggle-pw:hover {
+     background: #40916c;
+     transform: scale(1.08);
+   }
+   
+   .toggle-pw svg { stroke: #fff; }
+   
+   /* ── Error States ────────────────────────────────────────── */
+   
+   .field.has-error .input-wrap input {
+     border-color: #dc2626;
+     background: #fef9f9;
+   }
+   
+   .field.has-error .input-wrap input:focus {
+     box-shadow: 0 0 0 3.5px rgba(220,38,38,0.1);
+   }
+   
+   .error-msg {
+     margin: 4px 2px 0;
+     font-size: 0.77rem;
+     font-weight: 600;
+     color: #dc2626;
+     display: flex;
+     align-items: center;
+     gap: 4px;
+     line-height: 1.4;
+   }
+   
+   /* ── Checkbox ────────────────────────────────────────────── */
+   
+   .checkbox-field {
+     margin: 0 0 18px;
+     animation: fadeUp 0.5s ease 0.36s both;
+   }
+   
+   .checkbox-label {
+     display: flex;
+     align-items: flex-start;
+     gap: 10px;
+     cursor: pointer;
+     font-size: 0.83rem;
+     color: var(--text-secondary);
+     line-height: 1.55;
+   }
+   
+   .checkbox-label input[type="checkbox"] { display: none; }
+   
+   .checkbox-box {
+     flex-shrink: 0;
+     width: 19px; height: 19px;
+     border: 1.5px solid #b0d4b8;
+     border-radius: 5px;
+     background: #f4faf5;
+     display: flex;
+     align-items: center;
+     justify-content: center;
+     margin-top: 2px;
+     transition: border-color 0.2s, background 0.2s;
+   }
+   
+   .checkbox-label:hover .checkbox-box {
+     border-color: #52b788;
+     background: #e8f5ec;
+   }
+   
+   .checkbox-label input[type="checkbox"]:checked + .checkbox-box {
+     background: #2d6a4f;
+     border-color: #2d6a4f;
+   }
+   
+   .checkbox-check {
+     color: #fff;
+     font-size: 0.72rem;
+     font-weight: 800;
+     animation: checkPop 0.28s cubic-bezier(0.34,1.56,0.64,1) both;
+   }
+   
+   .checkbox-text a {
+     color: #2d6a4f;
+     font-weight: 700;
+     text-decoration: none;
+     position: relative;
+     transition: color 0.2s;
+   }
+   
+   .checkbox-text a::after {
+     content: "";
+     position: absolute;
+     bottom: -1px; left: 0; right: 0;
+     height: 1.5px;
+     background: #52b788;
+     transform: scaleX(0);
+     transform-origin: left;
+     transition: transform 0.2s;
+   }
+   
+   .checkbox-text a:hover { color: #40916c; }
+   .checkbox-text a:hover::after { transform: scaleX(1); }
+   
+   .checkbox-field.has-error .checkbox-box { border-color: #dc2626; }
+   
+   /* ── Primary Button ──────────────────────────────────────── */
+   
+   .btn-primary {
+     position: relative;
+     width: 100%;
+     padding: 13px;
+     min-height: 50px;
+     font-size: 0.97rem;
+     font-weight: 700;
+     font-family: inherit;
+     color: #ffffff;
+     background: linear-gradient(135deg, #1b4332 0%, #2d6a4f 50%, #40916c 100%);
+     background-size: 200% 200%;
+     border: none;
+     border-radius: 10px;
+     cursor: pointer;
+     letter-spacing: 0.3px;
+     overflow: hidden;
+     display: flex;
+     align-items: center;
+     justify-content: center;
+     gap: 8px;
+     animation: fadeUp 0.5s ease 0.42s both, glowPulse 3.5s ease 1.5s infinite;
+     transition:
+       transform 0.22s cubic-bezier(0.34,1.56,0.64,1),
+       box-shadow 0.22s ease,
+       background-position 0.4s ease;
+   }
+   
+   .btn-primary:hover {
+     background-position: 100% 50%;
+     transform: translateY(-2px) scale(1.01);
+     box-shadow: 0 10px 28px rgba(27,67,50,0.3), 0 3px 10px rgba(27,67,50,0.18);
+   }
+   
+   .btn-primary:active {
+     transform: scale(0.98);
+     box-shadow: 0 4px 12px rgba(27,67,50,0.2);
+   }
+   
+   .btn-primary::before {
+     content: "";
+     position: absolute;
+     top: 0; left: -100%;
+     width: 55%; height: 100%;
+     background: linear-gradient(90deg, transparent, rgba(255,255,255,0.18), transparent);
+     transform: skewX(-18deg);
+     transition: left 0.5s ease;
+     pointer-events: none;
+   }
+   
+   .btn-primary:hover::before { left: 160%; }
+   
+   .btn-arrow {
+     transition: transform 0.2s ease;
+     display: inline-block;
+   }
+   
+   .btn-primary:hover .btn-arrow { transform: translateX(4px); }
+   
+   /* ── Sign In Link ────────────────────────────────────────── */
+   
+   .signin-link {
+     text-align: center;
+     margin: 18px 0 0;
+     font-size: 0.88rem;
+     color: var(--text-muted);
+     animation: fadeUp 0.5s ease 0.48s both;
+   }
+   
+   .signin-link a {
+     color: #2d6a4f;
+     font-weight: 700;
+     text-decoration: none;
+     position: relative;
+     transition: color 0.2s;
+   }
+   
+   .signin-link a::after {
+     content: "";
+     position: absolute;
+     bottom: -2px; left: 0; right: 0;
+     height: 1.5px;
+     background: #52b788;
+     transform: scaleX(0);
+     transform-origin: left;
+     transition: transform 0.22s;
+   }
+   
+   .signin-link a:hover { color: #40916c; }
+   .signin-link a:hover::after { transform: scaleX(1); }
+   
+   /* ── Success Card ────────────────────────────────────────── */
+   
+   .success-card {
+     text-align: center;
+     padding: 52px 32px;
+   }
+   
+   .success-icon {
+     font-size: 3rem;
+     margin-bottom: 12px;
+     display: block;
+     animation: successBounce 0.6s cubic-bezier(0.34,1.56,0.64,1) both;
+   }
+   
+   .success-card h2 {
+     font-family: 'Playfair Display', serif;
+     font-size: 1.5rem;
+     font-weight: 800;
+     margin: 0 0 10px;
+     color: #1b4332;
+     animation: fadeUp 0.5s ease 0.1s both;
+   }
+   
+   .success-card p {
+     font-size: 0.93rem;
+     color: var(--text-muted);
+     margin: 0 0 26px;
+     animation: fadeUp 0.5s ease 0.2s both;
+   }
+   
+   .success-card strong { color: #1b4332; }
+   
+   /* ── Responsive — Tablet ─────────────────────────────────── */
+   
+   @media (max-width: 540px) {
+     .signup-page {
+       padding: 20px 12px 48px;
+     }
+   
+     .signup-card {
+       padding: 32px 20px 28px;
+       border-radius: 13px;
+     }
+   
+     .signup-page::before,
+     .signup-page::after { display: none; }
+   
+     .signup-header h1 { font-size: 1.42rem; }
+     .signup-header p  { font-size: 0.85rem; }
+     .login-logo       { height: 40px; }
+     .back-home-btn    { font-size: 0.81rem; margin-bottom: 14px; }
+   
+     .eco-strip { gap: 10px; padding: 8px 10px; }
+     .eco-badge { font-size: 0.72rem; }
+   }
+   
+   /* ── Responsive — Mobile ─────────────────────────────────── */
+   
+   @media (max-width: 400px) {
+     .signup-page { padding: 14px 10px 40px; }
+   
+     .signup-card {
+       padding: 26px 15px 22px;
+       border-radius: 11px;
+     }
+   
+     .signup-header h1 { font-size: 1.28rem; }
+   
+     .social-btn { font-size: 0.82rem; padding: 10px 12px; gap: 8px; }
+   
+     .field label { font-size: 0.8rem; }
+   
+     .input-wrap input {
+       font-size: 0.88rem;
+       padding: 11px 42px 11px 38px;
+     }
+   
+     .input-icon { left: 10px; font-size: 0.85rem; }
+   
+     .toggle-pw { width: 28px; height: 28px; right: 4px; }
+   
+     .btn-primary { font-size: 0.92rem; padding: 12px; min-height: 46px; }
+   
+     .checkbox-label { font-size: 0.79rem; }
+     .error-msg      { font-size: 0.75rem; }
+     .signin-link    { font-size: 0.84rem; }
+   
+     .success-card { padding: 36px 14px; }
+     .success-card h2 { font-size: 1.28rem; }
+   }
+   
+   /* ── Reduced Motion ──────────────────────────────────────── */
+   
+   @media (prefers-reduced-motion: reduce) {
+     *, *::before, *::after {
+       animation-duration: 0.01ms !important;
+       animation-iteration-count: 1 !important;
+       transition-duration: 0.01ms !important;
+     }
+   }
